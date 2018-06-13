@@ -8,6 +8,6 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
-    @GET("/api/users/{id}")
+    @GET("api/users/{id}")
     Single<User> userData(@Path("id") int id);
 }

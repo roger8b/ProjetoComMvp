@@ -1,8 +1,6 @@
 package com.example.rm.projetocommvp.api;
 
-import android.support.graphics.drawable.VectorDrawableCompat;
 
-import com.example.rm.projetocommvp.BuildConfig;
 import com.example.rm.projetocommvp.model.User;
 
 import io.reactivex.Single;
@@ -18,9 +16,10 @@ public class ApiHelper implements ApiMvpHelper {
         mApiInterface = getRetrofit().create(ApiInterface.class);
     }
 
+
     private static Retrofit getRetrofit(){
         return new Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl("https://reqres.in")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
