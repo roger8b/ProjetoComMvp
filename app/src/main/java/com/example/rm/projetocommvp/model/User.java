@@ -5,68 +5,24 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    @SerializedName("id")
+    @SerializedName("data")
     @Expose
-    public Integer id;
-    @SerializedName("first_name")
-    @Expose
-    public String firstName;
-    @SerializedName("last_name")
-    @Expose
-    public String lastName;
-    @SerializedName("avatar")
-    @Expose
-    public String avatar;
+    public UserData userData;
 
     /**
      * No args constructor for use in serialization
+     *
      */
     public User() {
     }
 
     /**
-     * @param id
-     * @param lastName
-     * @param avatar
-     * @param firstName
+     *
+     * @param userData
      */
-    public User(Integer id, String firstName, String lastName, String avatar) {
+    public User(UserData userData) {
         super();
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.avatar = avatar;
+        this.userData = userData;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
 }

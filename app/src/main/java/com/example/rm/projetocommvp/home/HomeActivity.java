@@ -37,9 +37,9 @@ public class HomeActivity extends AppCompatActivity implements HomeMvpContractVi
 
     @Override
     public void showUser(User user) {
-       // Log.println(Log.ASSERT, "Name", user.getFirstName());
-       // Log.println(Log.ASSERT, "Last", user.getLastName());
-       // Log.println(Log.ASSERT, "Avatar", user.getAvatar());
+        Log.println(Log.ASSERT, "Name", user.userData.firstName);
+        Log.println(Log.ASSERT, "Last", user.userData.lastName);
+        Log.println(Log.ASSERT, "Avatar", user.userData.avatar);
 
     }
 
