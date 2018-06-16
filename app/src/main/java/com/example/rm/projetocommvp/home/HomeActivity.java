@@ -3,7 +3,6 @@ package com.example.rm.projetocommvp.home;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.example.rm.projetocommvp.R;
@@ -11,8 +10,12 @@ import com.example.rm.projetocommvp.databinding.ActivityHomeBinding;
 import com.example.rm.projetocommvp.home.interfaces.HomeMvpContractPresenter;
 import com.example.rm.projetocommvp.home.interfaces.HomeMvpContractView;
 import com.example.rm.projetocommvp.model.User;
+import com.jakewharton.rxbinding2.view.RxView;
 
-public class HomeActivity extends AppCompatActivity implements HomeMvpContractView, View.OnClickListener {
+import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
+
+public class HomeActivity extends AppCompatActivity implements HomeMvpContractView {
 
     HomeMvpContractPresenter mPresenter;
     ActivityHomeBinding mBinding;
@@ -23,9 +26,23 @@ public class HomeActivity extends AppCompatActivity implements HomeMvpContractVi
         setContentView(R.layout.activity_home);
 
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_home,null );
+
         init();
 
-        mBinding.btRequest.setOnClickListener(this);
+
+        Disposable subscribeButton1 = RxView.clicks(mBinding.btUser1)
+                .subscribe(aVoid -> {
+
+                    mPresenter.requestUserData(1);
+
+                });
+
+        Disposable subscribeButton2 = RxView.clicks(mBinding.btUser2)
+                .subscribe(aVoid -> {
+                    mPresenter.requestUserData(2);
+                });
+
+
 
 
     }
@@ -37,14 +54,16 @@ public class HomeActivity extends AppCompatActivity implements HomeMvpContractVi
 
     @Override
     public void showUser(User user) {
-        Log.println(Log.ASSERT, "Name", user.userData.firstName);
-        Log.println(Log.ASSERT, "Last", user.userData.lastName);
-        Log.println(Log.ASSERT, "Avatar", user.userData.avatar);
+
+        mBinding.tvName.setText(user.userData.firstName);
+        mBinding.tvLast.setText(user.userData.lastName);
+        mBinding.tvAvatar.setText(user.userData.avatar);
+
+
 
     }
 
-    @Override
-    public void onClick(View view) {
-        mPresenter.initialize();
-    }
+
+
+
 }

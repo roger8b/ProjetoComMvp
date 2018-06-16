@@ -1,13 +1,14 @@
 package com.example.rm.projetocommvp.home;
 
 import android.content.Context;
+import android.view.View;
 
 import com.example.rm.projetocommvp.home.interfaces.HomeMvpContractDataManager;
 import com.example.rm.projetocommvp.home.interfaces.HomeMvpContractPresenter;
 import com.example.rm.projetocommvp.home.interfaces.HomeMvpContractView;
 import com.example.rm.projetocommvp.model.User;
 
-import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -30,9 +31,9 @@ public class HomePresenter implements HomeMvpContractPresenter {
     }
 
     @Override
-    public void initialize() {
+    public void requestUserData(int userId) {
 
-        mDatamanager.requestUserData(2)
+        mDatamanager.requestUserData(userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<User>() {
@@ -54,4 +55,12 @@ public class HomePresenter implements HomeMvpContractPresenter {
                 });
 
     }
+
+    @Override
+    public void buttonCliked(View view) {
+
+
+    }
+
+
 }
