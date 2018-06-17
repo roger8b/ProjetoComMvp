@@ -5,6 +5,9 @@ import android.view.View;
 import com.example.rm.projetocommvp.home.HomeActivity;
 import com.example.rm.projetocommvp.model.User;
 
+import java.util.List;
+
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 public interface HomeMvpContractPresenter {
@@ -14,4 +17,5 @@ public interface HomeMvpContractPresenter {
 
     void buttonCliked(View view);
 
+    void colorList(Observable<List<String>> listObservable);
 }

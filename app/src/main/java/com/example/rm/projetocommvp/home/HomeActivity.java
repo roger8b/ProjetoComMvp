@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.Utils;
 import com.example.rm.projetocommvp.R;
 import com.example.rm.projetocommvp.databinding.ActivityHomeBinding;
 import com.example.rm.projetocommvp.home.interfaces.HomeMvpContractPresenter;
@@ -12,23 +14,36 @@ import com.example.rm.projetocommvp.home.interfaces.HomeMvpContractView;
 import com.example.rm.projetocommvp.model.User;
 import com.jakewharton.rxbinding2.view.RxView;
 
-import io.reactivex.Single;
+import java.util.LinkedList;
+import java.util.List;
+
+import io.reactivex.Observable;
+
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class HomeActivity extends AppCompatActivity implements HomeMvpContractView {
+import static junit.framework.Assert.assertTrue;
+
+public class HomeActivity extends AppCompatActivity implements HomeMvpContractView, View.OnClickListener {
 
     HomeMvpContractPresenter mPresenter;
     ActivityHomeBinding mBinding;
+    String result = "";
+    Observable<List<String>> listObservable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Utils.init(getApplicationContext());
+        ToastUtils.showShort("Home Actiity");
+
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_home,null );
 
-        init();
+         listObservable = Observable.just(getColorList());
 
+        init();
 
         Disposable subscribeButton1 = RxView.clicks(mBinding.btUser1)
                 .subscribe(aVoid -> {
@@ -45,11 +60,15 @@ public class HomeActivity extends AppCompatActivity implements HomeMvpContractVi
 
 
 
+
+
     }
+
 
     private void init() {
         mPresenter = new HomePresenter(getApplicationContext());
         mPresenter.attach(this);
+        mPresenter.colorList(listObservable);
     }
 
     @Override
@@ -64,6 +83,22 @@ public class HomeActivity extends AppCompatActivity implements HomeMvpContractVi
     }
 
 
+    @Override
+    public void onClick(View v) {
 
+    }
 
+    public List<String> getColorList() {
+
+        List<String> colorList = new LinkedList<>();
+
+        colorList.add(1,"fbdfigbdgi");
+        colorList.add(2,"fbdfigbdgi");
+        colorList.add(3,"fbdfigbdgi");
+        colorList.add(4,"fbdfigbdgi");
+        colorList.add(5,"fbdfigbdgi");
+        colorList.add(6,"fbdfigbdgi");
+
+        return colorList;
+    }
 }
